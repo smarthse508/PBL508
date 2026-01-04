@@ -245,11 +245,11 @@ export const sendResetOtp = async (req, res) => {
       from: process.env.SENDER_EMAIL,
       to: user.email,
       subject: "Password Reset OTP",
-      text: `Your OTP is ${otp}. Use this OTP within 15 minutes to reset your password.`,
+      text: `Kode OTP anda adalah ${otp}. Kode ini hanya berlaku 15 menit. Jangan berikan kode ini kepada siapa pun.`,
     };
 
     await transporter.sendMail(mailOption);
-    return res.json({ success: true, message: 'OTP sent to your email' });
+    return res.json({ success: true});
 
   } catch (error) {
     return res.json({ success: false, message: error.message });
@@ -306,7 +306,7 @@ export const verifyResetOtp = async (req, res) => {
     if (user.resetOtp !== otp) return res.json({ success: false, message: 'Invalid OTP' });
     if (user.resetOtpExpireAt < Date.now()) return res.json({ success: false, message: 'OTP expired' });
 
-    return res.json({ success: true, message: 'OTP verified' });
+    return res.json({ success: true });
 
   } catch (error) {
     return res.json({ success: false, message: error.message });

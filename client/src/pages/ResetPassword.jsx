@@ -71,27 +71,27 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+     <div className="min-h-screen flex items-center justify-center">
       <img
         src="/loginhero.svg"
-        alt="Reset Hero"
-        className="hidden md:block w-1/3 h-auto object-cover"
+        alt="login hero"
+        className="hidden md:block w-1/2 h-screen object-cover"
       />
 
-      <div className="w-full max-w m-24 p-4 space-y-6">
-        <h1 className="text-4xl font-bold text-center text-emerald-700">
+      <div className="w-full max-w space-y-4 m-8 p-4">
+        <h1 className="text-4xl font-bold text-center">
           Reset Password
         </h1>
 
-        {/* STEP 1 - Masukkan email */}
+        {/*Masukkan email*/}
         {step === 1 && (
           <form onSubmit={handleSendOtp} className="space-y-4">
             <p className="text-center text-gray-700">
-              Masukkan email untuk mencari akun Anda.
+              Masukkan email anda untuk menereset password.
             </p>
             <input
               type="email"
-              placeholder="Email atau nomor ponsel"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="border p-4 w-full rounded-xl"
@@ -100,26 +100,26 @@ export default function ResetPassword() {
               <button
                 type="button"
                 onClick={() => (window.location.href = "/login")}
-                className="w-1/2 bg-gray-300 py-3 rounded-xl"
+                className="w-1/2 text-lg font-semibold bg-gray-400 text-white py-3 rounded hover:bg-gray-700 rounded-xl cursor-pointer"
               >
                 Batal
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="w-1/2 bg-green-600 text-white py-3 rounded-xl"
+                className="w-1/2 text-lg font-semibold bg-green-600 text-white py-3 rounded hover:bg-green-700 rounded-xl cursor-pointer"
               >
-                {loading ? "Mengirim..." : "Cari"}
+                {loading ? "Mengirim..." : "Kirim"}
               </button>
             </div>
           </form>
         )}
 
-        {/* STEP 2 - Masukkan OTP */}
+        {/*Masukkan OTP*/}
         {step === 2 && (
           <form onSubmit={handleVerifyOtp} className="space-y-4">
             <p className="text-center">
-              Kami mengirimi Anda kode ke: <b>{email}</b>
+              Silakan cek kode OTP di email anda.
             </p>
             <input
               type="text"
@@ -172,7 +172,7 @@ export default function ResetPassword() {
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? "🙈" : "👁️"}
+            {showPassword ? (<i className="bi bi-eye-slash-fill cursor-pointer"  style={{ fontSize: '1.25rem' }}></i>) : (<i className="bi bi-eye-fill cursor-pointer"  style={{ fontSize: '1.25rem' }}></i>)}
               </button>
             </div>
 

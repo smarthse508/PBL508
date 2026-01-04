@@ -3,7 +3,9 @@ import { useLocation } from "react-router-dom";
 
 export default function Login() {
   const location = useLocation();
-  const [isRegister, setIsRegister] = useState(location.state?.register || false);
+  const [isRegister, setIsRegister] = useState(
+    location.state?.register || false
+  );
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -34,7 +36,7 @@ export default function Login() {
       setMessage(data.message);
 
       if (!data.success) return;
-      
+
       if (data.success) {
         localStorage.setItem("user_id", data.user_id);
         localStorage.setItem("user_email", data.email);
@@ -62,21 +64,13 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-    <img
-      src="/loginhero.svg"
-      alt="login hero"
-      className="hidden md:block w-1/3 h-auto object-cover"
+      <img
+        src="/loginhero.svg"
+        alt="login hero"
+        className="hidden md:block w-1/2 h-screen object-cover"
       />
 
-      <form onSubmit={handleSubmit} className="w-full max-w space-y-4 m-24 p-4">
-        <button
-          type="button"
-          onClick={() => window.location.href = "/"}
-          className="absolute top-4 right-4 bg-green-200 text-green-800 px-4 py-2 rounded hover:bg-green-300 transition"
-        >
-          Kembali
-        </button>
-
+      <form onSubmit={handleSubmit} className="w-full max-w space-y-4 m-8 p-4">
         <h1 className="text-4xl font-bold text-center">
           {isRegister ? "Daftar" : "Login"}
         </h1>
@@ -112,10 +106,10 @@ export default function Login() {
           />
           <button
             type="button"
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600"
+            className="absolute right-4 top-1/2 -translate-y-1/2"
             onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? "🙈" : "👁️"}
+            {showPassword ? (<i className="bi bi-eye-slash-fill cursor-pointer"  style={{ fontSize: '1.25rem' }}></i>) : (<i className="bi bi-eye-fill cursor-pointer"  style={{ fontSize: '1.25rem' }}></i>)}
           </button>
         </div>
 
@@ -128,28 +122,34 @@ export default function Login() {
           </p>
         )}
 
-
         <button
           type="submit"
-          className="w-full text-lg font-semibold bg-green-600 text-white py-4 rounded hover:bg-green-700 rounded-xl"
+          className="w-full text-lg font-semibold bg-green-600 text-white py-4 rounded hover:bg-green-700 rounded-xl cursor-pointer"
         >
           {isRegister ? "Daftar" : "Login"}
         </button>
 
         <p
           onClick={() => setIsRegister(!isRegister)}
-          className="text-center font-semibold cursor-pointer"
+          className="text-center font-semibold"
         >
-          {isRegister
-            ? "Sudah punya akun? Login"
-            : "Belum punya akun? Daftar"}
+          {isRegister ? (
+            <>
+              Sudah punya akun?{" "}
+              <span className="text-green-700 hover:text-green-800 cursor-pointer">
+                Login
+              </span>
+            </>
+          ) : (
+            <>
+              Belum punya akun?{" "}
+              <span className="text-green-700 hover:text-green-800 cursor-pointer">
+                Daftar
+              </span>
+            </>
+          )}
         </p>
-
-        {message && (
-          <p className="text-center text-sm text-gray-600 mt-4 bg-emerald-50 py-2 rounded">
-            {message}
-          </p>
-        )}
+        
       </form>
     </div>
   );

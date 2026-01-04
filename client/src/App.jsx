@@ -25,7 +25,7 @@ function LandingPage() {
   return (
     <>
       {/* ================= HEADER ================= */}
-      <header className="bg-white shadow-md fixed top-0 left-0 w-full z-50">
+      <header className="bg-white shadow-md fixed top-0 left-0 w-full z-50 animate-fadeDown">
         <nav className="flex justify-between items-center max-w-7xl mx-auto py-4 px-6">
           {/* Logo */}
           <div className="flex items-center space-x-2">
